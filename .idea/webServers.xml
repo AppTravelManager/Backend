@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9d05ec8f-8286-4383-ac71-62a9a581eecb" name="TravelManagerHost" url="http://ftp.travelmanagerhost.altervista.org">
+        <fileTransfer host="ftp.travelmanagerhost.altervista.org" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
