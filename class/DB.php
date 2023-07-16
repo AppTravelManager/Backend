@@ -2,14 +2,21 @@
 
     class DB
     {
-        protected $pdo;
+        public $pdo;
 
         /**
          * @param $pdo
          */
         public function __construct()
         {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=my_travelmanagerhost','root','');
+            try {
+                $this->pdo = new PDO('mysql:host=localhost;dbname=my_travelmanagerhost',"root","");
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            } catch(PDOException $e) {
+                echo("Can't open the database." . $e->getMessage());
+            }
+
         }
 
         /**
@@ -30,16 +37,21 @@
 
         public function alreadyExists($table,$field,$value)
         {
-            $sql = "SELECT * FROM `".$table."` WHERE `".$field."` = :value ";
+            try{
+                $sql = "SELECT * FROM `".$table."` WHERE `".$field."` = :value ";
 
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindValue(':value',$value);
-            $stmt->execute();
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindValue(':value',$value);
+                $stmt->execute();
 
-            if($stmt->rowCount() > 0)
-                return true;
-            else
-                return false;
+                if($stmt->rowCount() > 0)
+                    return true;
+                else
+                    return false;
+            }catch(PDOException $e){
+                echo "Errore --> " . $e->getMessage();
+            }
+
         }
 
 

@@ -48,14 +48,20 @@
         }
 
         public function login($email, $pwd){
-            $stmt = $this->select('*',$this->table,array('email' => $email, 'pwd' => $pwd), array('and'));
-            $stmt->execute();
 
-            if($stmt->rowCount()) {
-                while($row = $stmt->fetch())
-                    return $row['idUtente'];
-            }else
-                return 0;
+            try {
+                $stmt = $this->select('*',$this->table,array('email' => $email, 'password' => $pwd), array('and'));
+                $stmt->execute();
+
+                if($stmt->rowCount()) {
+                    while($row = $stmt->fetch())
+                        return $row['idUtente'];
+                }else
+                    return 0;
+            }catch (PDOException $e){
+                echo "Errore --> " . $e->getMessage();
+            }
+
         }
 
         public function generateRandomString($length) {
@@ -89,6 +95,26 @@
 
         }
 
+        public function getUserInfo(){
+            $info = array();
+
+            try {
+                $stmt = $this->select('*',$this->table,array('idUtente' => $this->uid));
+                $stmt->execute();
+
+                if($stmt->rowCount()) {
+                    while($row = $stmt->fetch())
+                        array_push($info, $row);
+                }else
+                    return 0;
+
+            }catch (PDOException $e){
+                echo "Errore -> " . $e->getMessage();
+            }
+
+            return $info;
+
+        }
 
     }
 
