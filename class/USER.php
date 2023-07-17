@@ -11,6 +11,7 @@
          */
         public function __construct($uid, $table)
         {
+            parent::__construct();
             $this->uid = $uid;
             $this->table = $table;
         }

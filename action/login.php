@@ -3,7 +3,6 @@
     include '../class/USER.php';
     include '../class/RESPONSE.php';
 
-    $db = new DB();
     $user = new USER(null, 'utenti');
     $response = new RESPONSE(null);
 

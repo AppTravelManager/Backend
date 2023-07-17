@@ -2,7 +2,7 @@
 
     class DB
     {
-        public $pdo;
+        protected $pdo;
 
         /**
          * @param $pdo
@@ -16,7 +16,6 @@
             } catch(PDOException $e) {
                 echo("Can't open the database." . $e->getMessage());
             }
-
         }
 
         /**
@@ -55,7 +54,16 @@
         }
 
 
-        public function select($fields,$table,$conditions = [],$booleans = [],$orderBy='')
+        /**
+         * @param $fields
+         * @param $table
+         * @param $join
+         * @param $conditions
+         * @param $booleans
+         * @param $orderBy
+         * @return false|PDOStatement
+         */
+        public function select($fields,$table,$join,$conditions = [],$booleans = [],$orderBy='')
         {
             $sql = "SELECT ";
             if($fields == '*')
@@ -70,6 +78,8 @@
                 $sql = rtrim($sql, ',');
                 $sql .= " FROM `" . $table ."`";
             }
+
+            $sql .= $join;
 
             if(count($conditions) > 0)
             {
@@ -91,7 +101,6 @@
 
             if($orderBy != '')
                 $sql .= " ORDER BY `".$orderBy['columns']."` ".$orderBy['option'];
-
 
             $stmt = $this->pdo->prepare($sql);
             return $stmt;
