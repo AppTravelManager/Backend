@@ -1,4 +1,5 @@
 <?php
+
     include '../../class/DB.php';
     include '../../class/USER.php';
     include '../../class/RESPONSE.php';

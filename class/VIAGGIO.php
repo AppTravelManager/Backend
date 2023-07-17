@@ -57,7 +57,7 @@
             $viaggi = array();
             $join = "INNER JOIN utenti_viaggi ON ksViaggio = viaggi.idViaggio";
 
-            $stmt = $this->select('*',$this->table,$join,array('ksUtente' => $uid));
+            $stmt = $this->select('*',$this->table,array('ksUtente' => $uid),array(),'',$join);
             $stmt->execute();
 
             while($row = $stmt->fetch())

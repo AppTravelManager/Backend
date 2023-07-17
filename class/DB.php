@@ -63,7 +63,7 @@
          * @param $orderBy
          * @return false|PDOStatement
          */
-        public function select($fields,$table,$join,$conditions = [],$booleans = [],$orderBy='')
+        public function select($fields,$table,$conditions = [],$booleans = [],$orderBy='', $join = '')
         {
             $sql = "SELECT ";
             if($fields == '*')
@@ -101,6 +101,7 @@
 
             if($orderBy != '')
                 $sql .= " ORDER BY `".$orderBy['columns']."` ".$orderBy['option'];
+
 
             $stmt = $this->pdo->prepare($sql);
             return $stmt;
