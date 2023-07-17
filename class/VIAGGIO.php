@@ -55,7 +55,7 @@
         public function getUserViaggi($uid){
 
             $viaggi = array();
-            $join = "INNER JOIN utenti_viaggi ON ksViaggio = viaggi.idViaggio";
+            $join = " INNER JOIN utenti_viaggi ON ksViaggio = viaggi.idViaggio";
 
             $stmt = $this->select('*',$this->table,array('ksUtente' => $uid),array(),'',$join);
             $stmt->execute();
@@ -101,6 +101,20 @@
 
             while($row = $stmt->fetch())
                 return $row;
+        }
+
+        public function getViaggioMembers($idViaggio){
+
+            $utenti = array();
+
+            $join = " INNER JOIN utenti ON ksUtente = idUtente INNER JOIN viaggi ON ksViaggio = idViaggio";
+            $stmt = $this->select('*',$this->table,array('ksViaggio' => $idViaggio),array(),'',$join);
+            $stmt->execute();
+
+            while($row = $stmt->fetch())
+                $utenti[] = $row;
+
+            return $utenti;
         }
 
     }

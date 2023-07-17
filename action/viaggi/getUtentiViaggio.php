@@ -4,14 +4,14 @@
     include '../../class/VIAGGIO.php';
     include '../../class/RESPONSE.php';
 
-    $classViaggio = new viaggio(null, 'viaggi');
+    $classViaggio = new viaggio(null, 'utenti_viaggi');
     $response = new RESPONSE(null);
 
-    $uid = $_POST['uid'];
+    $idViaggio = $_POST['idViaggio'];
 
-    $viaggi = $classViaggio->getUserViaggi($uid);
+    $utenti = $classViaggio->getViaggioMembers($idViaggio);
 
-    $response->setResponse($viaggi);
+    $response->setResponse($utenti);
 
     echo $response->getJsonResponse();
 
