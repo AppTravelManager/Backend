@@ -1,7 +1,7 @@
 <?php
-    include '../class/DB.php';
-    include '../class/USER.php';
-    include '../class/RESPONSE.php';
+    include '../../class/DB.php';
+    include '../../class/USER.php';
+    include '../../class/RESPONSE.php';
 
     $user = new USER(null, 'utenti');
     $response = new RESPONSE(null);
@@ -38,7 +38,6 @@
         }
     }else{
         $uid = $user->registra($_POST);
-
 
         if($uid > 0){
             $user->setUid($uid);

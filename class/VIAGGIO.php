@@ -86,6 +86,23 @@
             return $stmt->rowCount();
         }
 
+        public function modificaViaggio($dati, $viaggioId){
+
+            $stmt = $this->update($dati,$this->table, array('idViaggio' => $viaggioId));
+            $stmt->execute();
+
+            return $stmt->rowCount();
+        }
+
+        public function getInfoViaggio($viaggioId){
+
+            $stmt = $this->select('*',$this->table,array('idViaggio' => $viaggioId));
+            $stmt->execute();
+
+            while($row = $stmt->fetch())
+                return $row;
+        }
+
     }
 
 ?>
